@@ -9,16 +9,7 @@ import java.util.Arrays;
 //         Arrays.sort(arr);
 //         for(i=0; i<arr.length-1; i++){
 //             x = arr[i];
-//             y = arr[i+1];
-//             if (x+1 != y){
-//                 System.out.println(x+1);
-//             }
-//         }
-//         if (x+1 == y){
-//                 System.out.println(x+1);
-//         }
-//     }
-// }
+//
 
 class FindingMisingValue{
     public static void main(String args[]){
