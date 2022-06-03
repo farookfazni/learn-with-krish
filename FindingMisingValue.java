@@ -1,15 +1,6 @@
 import java.io.*;
 import java.util.Arrays;
 
-// class FindNumber{
-//     public int findMisingValue(int a, int b[]){
-//         int arr[] = b;
-        
-//         int i,x,y;
-//         Arrays.sort(arr);
-//         for(i=0; i<arr.length-1; i++){
-//             x = arr[i];
-//
 
 class FindingMisingValue{
     public static void main(String args[]){
