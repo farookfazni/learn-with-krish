@@ -14,8 +14,10 @@ public class ReverseLinkedList{
         ll.add(6);
         System.out.println(ll);
 
-        int n = ll.size();
+        int n = ll.size();  // geting length of linked list
+
         System.out.println(n);
+        
         for(int j=0; j<n-1; j++){
             for(int i=0; i<n-j-1; i++){
                 int x = ll.get(i);
