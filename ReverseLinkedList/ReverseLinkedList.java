@@ -17,12 +17,12 @@ public class ReverseLinkedList{
         int n = ll.size();  // geting length of linked list
 
         System.out.println(n);
-        
+
         for(int j=0; j<n-1; j++){
             for(int i=0; i<n-j-1; i++){
-                int x = ll.get(i);
-                int y = ll.get(i+1);
-                ll.set(i,y);
+                int x = ll.get(i); // geting the i th value and storing it in x
+                int y = ll.get(i+1);  // geting the i+1 th value and storing it in y
+                ll.set(i,y); // replacing the i th and i+1 value(Swapping values)
                 ll.set(i+1,x);
             }
         }
