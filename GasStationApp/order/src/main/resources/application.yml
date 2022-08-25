@@ -5,15 +5,16 @@ spring:
   application:
     name: order
   datasource:
-    username: 'postgres'
+    username: postgres
     url: jdbc:postgresql://localhost:5432/order
-    password: 'password'
-    jpa:
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.PostgreSQLDialect
-          format_sql: 'true'
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
       hibernate:
-        ddl-auto: update
-      show-sql: 'true'
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        globally_quoted_identifiers: true
+    show-sql: true
 
