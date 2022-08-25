@@ -1,4 +1,4 @@
 package com.faznifarook.order;
 
-public record OrderRequest(Integer allocAmount) {
+public record OrderRequest(Integer allocAmount,String status) {
 }
