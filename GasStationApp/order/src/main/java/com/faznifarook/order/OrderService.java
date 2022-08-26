@@ -1,9 +1,12 @@
 package com.faznifarook.order;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-public record OrderService(OrderRepository orderRepository) {
+@AllArgsConstructor
+public class OrderService {
+    private final OrderRepository orderRepository;
     public void placeOrder(OrderRequest orderRequest) {
         Order order = Order.builder()
                 .status(orderRequest.status())
