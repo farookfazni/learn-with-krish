@@ -17,3 +17,5 @@ spring:
         format_sql: true
         globally_quoted_identifiers: true
     show-sql: true
+    kafka:
+      bootstrap-servers: localhost:9092
