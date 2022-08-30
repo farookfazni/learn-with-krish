@@ -1,6 +1,6 @@
 package com.faznifarook.order.config;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
+import org.springframework.kafka.support.serializer.JsonSerializer;
 import com.faznifarook.order.Order;
 import com.faznifarook.order.OrderRequest;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -36,15 +36,15 @@ public class KafkaProducerConfig {
 //    todo: Change String to Object Which we want to send
 
     @Bean
-    public ProducerFactory<String, Order> producerFactory(){
+    public ProducerFactory<String, OrderRequest> producerFactory(){
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
 //    todo: Change String to Object Which we want to send
 
     @Bean
-    public KafkaTemplate<String, Order> KafkaTemplate(
-            ProducerFactory<String, Order> producerFactory
+    public KafkaTemplate<String, OrderRequest> KafkaTemplate(
+            ProducerFactory<String, OrderRequest> producerFactory
     ) {
         return new KafkaTemplate<>(producerFactory);
     }

@@ -17,25 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     private final OrderService orderService;
-    @Autowired KafkaTemplate<String,Order> kafkaTemplate;
+    @Autowired KafkaTemplate<String,OrderRequest> kafkaTemplate;
 
     @PostMapping("/data")
     public void placeOrder(@RequestBody OrderRequest orderRequest){
         log.info("New Order has been Placed {}",orderRequest);
 ////        Sending to kafka Topic
-//        kafkaTemplate.send("mainTopic", orderRequest);
+        kafkaTemplate.send("mainTopic", orderRequest);
 //        Storing to database
         orderService.placeOrder(orderRequest);
     }
 
-    @PostMapping("/send")
-    public String sendMessage(@RequestBody Order order){
-//        log.info("New Order has been Placed {}",orderRequest);
-////        Sending to kafka Topic
-        kafkaTemplate.send("mainTopic", new Order(Long.valueOf("1"),1000,"created"));
-        return "Message Sent";
-//        Storing to database
-//        orderService.placeOrder(orderRequest);
-    }
+//    @PostMapping(value = "/send")
+//    public String sendMessage(@RequestBody Order order){
+////        log.info("New Order has been Placed {}",orderRequest);
+//////        Sending to kafka Topic
+//        kafkaTemplate.send("mainTopic", new Order(1,1000,"created"));
+//        return "Message Sent";
+////        Storing to database
+////        orderService.placeOrder(orderRequest);
+//    }
 
 }

@@ -24,11 +24,11 @@ public class Order {
             strategy = GenerationType.SEQUENCE,
             generator = "order_id_sequence"
     )
-    private Long orderId;
+    private Integer orderId;
     private Integer allocAmount;
     private String status;
 
-    public Order(Long orderId,
+    public Order(Integer orderId,
                  Integer allocAmount,
                  String status) {
         this.orderId = orderId;
@@ -36,11 +36,11 @@ public class Order {
         this.status = status;
     }
 
-    public Long getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
