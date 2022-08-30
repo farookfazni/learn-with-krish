@@ -7,18 +7,27 @@ import org.springframework.web.bind.annotation.*;
 // Allocation Controller Which handles Http Requests
 @RestController
 @RequestMapping("api/v1/allocation-check")
-@AllArgsConstructor
+//@AllArgsConstructor
 public class AllocationController {
 
-    private final AllocationCheckService allocationCheckService;
-//    private KafkaTemplate<String,String> kafkaTemplate;
+//    private final AllocationCheckService allocationCheckService;
+    private KafkaTemplate<String,String> kafkaTemplate;
 
-    @GetMapping(path = "{orderId}")
-    public AllocaionCheckResponce isStockAvailable(
-            @PathVariable("orderId") Long orderId){
+    public AllocationController(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
-        boolean isStockAvailable = allocationCheckService.isStockAvailable(orderId);
-        return new AllocaionCheckResponce(isStockAvailable);
+//    @GetMapping(path = "{orderId}")
+//    public AllocaionCheckResponce isStockAvailable(
+//            @PathVariable("orderId") Long orderId){
+//
+//        boolean isStockAvailable = allocationCheckService.isStockAvailable(orderId);
+//        return new AllocaionCheckResponce(isStockAvailable);
+//
+//    }
 
+    @PostMapping
+    public void publish(@RequestBody MessageRequest messageRequest){
+        kafkaTemplate.send("mainTopic", messageRequest.message());
     }
 }
