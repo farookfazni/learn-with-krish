@@ -36,15 +36,15 @@ public class KafkaProducerConfig {
 //    todo: Change String to Object Which we want to send
 
     @Bean
-    public ProducerFactory<String, OrderRequest> producerFactory(){
+    public ProducerFactory<String, Order> producerFactory(){
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
 //    todo: Change String to Object Which we want to send
 
     @Bean
-    public KafkaTemplate<String, OrderRequest> KafkaTemplate(
-            ProducerFactory<String, OrderRequest> producerFactory
+    public KafkaTemplate<String, Order> KafkaTemplate(
+            ProducerFactory<String, Order> producerFactory
     ) {
         return new KafkaTemplate<>(producerFactory);
     }

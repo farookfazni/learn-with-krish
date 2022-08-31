@@ -10,7 +10,7 @@ import javax.persistence.*;
 // order class
 @Data
 @Builder
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Order")
 public class Order {
@@ -28,13 +28,6 @@ public class Order {
     private Integer allocAmount;
     private String status;
 
-    public Order(Integer orderId,
-                 Integer allocAmount,
-                 String status) {
-        this.orderId = orderId;
-        this.allocAmount = allocAmount;
-        this.status = status;
-    }
 
     public Integer getOrderId() {
         return orderId;

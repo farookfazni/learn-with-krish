@@ -12,10 +12,10 @@ public class AllocationApplication {
         SpringApplication.run(AllocationApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
-        return args -> {
-            kafkaTemplate.send("mainTopic","Hello kafka");
-        };
-    }
+//    @Bean
+//    CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
+//        return args -> {
+//            kafkaTemplate.send("mainTopic","Hello kafka");
+//        };
+//    }
 }
