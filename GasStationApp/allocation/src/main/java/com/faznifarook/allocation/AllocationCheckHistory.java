@@ -25,7 +25,9 @@ public class AllocationCheckHistory {
             generator = "allocation_id_sequence"
     )
     private Long id;
-    private Long orderId;
+    private Integer orderId;
+    private Integer allocAmmount;
+    private String status;
     private Boolean isStockAvailable;
     private LocalDateTime createdAt;
 

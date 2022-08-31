@@ -1,33 +1,29 @@
 package com.faznifarook.allocation;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 // Allocation Controller Which handles Http Requests
 @RestController
 @RequestMapping("api/v1/allocation-check")
-//@AllArgsConstructor
+@AllArgsConstructor
 public class AllocationController {
 
-//    private final AllocationCheckService allocationCheckService;
-    private KafkaTemplate<String,String> kafkaTemplate;
+    private final AllocationCheckService allocationCheckService;
 
-    public AllocationController(KafkaTemplate<String, String> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
+    @GetMapping(path = "{orderId}")
+    public AllocaionCheckResponce isStockAvailable(
+            @PathVariable("orderId") Integer orderId){
+
+        boolean isStockAvailable = allocationCheckService.isStockAvailable(orderId);
+        return new AllocaionCheckResponce(isStockAvailable);
+
     }
 
-//    @GetMapping(path = "{orderId}")
-//    public AllocaionCheckResponce isStockAvailable(
-//            @PathVariable("orderId") Long orderId){
-//
-//        boolean isStockAvailable = allocationCheckService.isStockAvailable(orderId);
-//        return new AllocaionCheckResponce(isStockAvailable);
-//
+//    @PostMapping
+//    public void publish(@RequestBody MessageRequest messageRequest){
+//        kafkaTemplate.send("mainTopic", messageRequest.message());
 //    }
-
-    @PostMapping
-    public void publish(@RequestBody MessageRequest messageRequest){
-        kafkaTemplate.send("mainTopic", messageRequest.message());
-    }
 }

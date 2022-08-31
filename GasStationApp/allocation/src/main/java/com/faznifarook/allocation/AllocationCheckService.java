@@ -1,6 +1,7 @@
 package com.faznifarook.allocation;
 
 import lombok.AllArgsConstructor;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,8 +12,21 @@ import java.time.LocalDateTime;
 public class AllocationCheckService {
 
     private final AllocationCheckHistoryRepositry allocationCheckHistoryRepositry;
+    private final OrderRepository orderRepository;
 
-    public boolean isStockAvailable(Long orderID){
+//    @KafkaListener(topics = "mainTopic", groupId = "groupId")
+//    public void listener (Order data) {
+//
+//        Order order = Order.builder()
+//                .orderId(data.getOrderId())
+//                .allocAmount(data.getAllocAmount())
+//                .status(data.getStatus())
+//                .build();
+//        orderRepository.save(order);
+//    }
+
+//    @KafkaListener(topics = "mainTopic", groupId = "groupId")
+    public boolean isStockAvailable(Integer orderID){
         allocationCheckHistoryRepositry.save(
                 AllocationCheckHistory.builder()
                         .orderId(orderID)
@@ -22,4 +36,5 @@ public class AllocationCheckService {
         );
         return true;
     }
+
 }
