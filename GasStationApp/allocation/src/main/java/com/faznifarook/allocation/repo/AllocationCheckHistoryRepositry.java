@@ -1,5 +1,6 @@
-package com.faznifarook.allocation;
+package com.faznifarook.allocation.repo;
 
+import com.faznifarook.allocation.entity.AllocationCheckHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // Allocation Repo Which Connects Spring JPA

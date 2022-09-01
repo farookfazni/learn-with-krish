@@ -1,4 +1,4 @@
-package com.faznifarook.allocation;
+package com.faznifarook.allocation.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "AllocationCheck")
 public class AllocationCheckHistory {
     @Id
     @SequenceGenerator(

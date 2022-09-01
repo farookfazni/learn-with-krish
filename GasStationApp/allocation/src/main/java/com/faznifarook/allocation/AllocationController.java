@@ -2,6 +2,7 @@ package com.faznifarook.allocation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,10 +23,11 @@ public class AllocationController {
 //
 //    }
 
+//    @KafkaListener(topics = "mainTopic", groupId = "groupId")
 //    @PostMapping("/data")
-//    public void placeOrder(@RequestBody OrderRequest orderRequest){
-//        log.info("New Order has been Placed {}",orderRequest);
-//        orderService.placeOrder(orderRequest);
+//    public void placeAllocation(@RequestBody String data){ // AllocaionCheckResponce allocaionCheckResponce
+////        log.info("New Order has been Placed {}",orderRequest);
+//        allocationCheckService.listener(data);
 //    }
 
 //    @PostMapping

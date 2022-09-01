@@ -1,4 +1,4 @@
-package com.faznifarook.allocation;
+package com.faznifarook.allocation.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
