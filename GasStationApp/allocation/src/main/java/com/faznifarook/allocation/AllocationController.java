@@ -13,14 +13,20 @@ public class AllocationController {
 
     private final AllocationCheckService allocationCheckService;
 
-    @GetMapping(path = "{orderId}")
-    public AllocaionCheckResponce isStockAvailable(
-            @PathVariable("orderId") Integer orderId){
+//    @GetMapping(path = "{orderId}")
+//    public AllocaionCheckResponce isStockAvailable(
+//            @PathVariable("orderId") Integer orderId){
+//
+//        boolean isStockAvailable = allocationCheckService.isStockAvailable(orderId);
+//        return new AllocaionCheckResponce(isStockAvailable);
+//
+//    }
 
-        boolean isStockAvailable = allocationCheckService.isStockAvailable(orderId);
-        return new AllocaionCheckResponce(isStockAvailable);
-
-    }
+//    @PostMapping("/data")
+//    public void placeOrder(@RequestBody OrderRequest orderRequest){
+//        log.info("New Order has been Placed {}",orderRequest);
+//        orderService.placeOrder(orderRequest);
+//    }
 
 //    @PostMapping
 //    public void publish(@RequestBody MessageRequest messageRequest){

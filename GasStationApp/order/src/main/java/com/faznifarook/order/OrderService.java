@@ -14,7 +14,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    @Autowired
+
     KafkaTemplate<String,Order> kafkaTemplate;
     public void placeOrder(OrderRequest orderRequest) {
 

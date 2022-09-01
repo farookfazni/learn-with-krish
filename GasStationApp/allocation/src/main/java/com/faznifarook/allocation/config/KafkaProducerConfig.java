@@ -28,7 +28,7 @@ public class KafkaProducerConfig {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         return props;
     }
 
@@ -36,15 +36,15 @@ public class KafkaProducerConfig {
 //    todo: Change String to Object Which we want to send
 
     @Bean
-    public ProducerFactory<String, Order> producerFactory(){
+    public ProducerFactory<String, String> producerFactory(){
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
 //    todo: Change String to Object Which we want to send
 
     @Bean
-    public KafkaTemplate<String, Order> KafkaTemplate(
-            ProducerFactory<String, Order> producerFactory
+    public KafkaTemplate<String, String> KafkaTemplate(
+            ProducerFactory<String, String> producerFactory
     ) {
         return new KafkaTemplate<>(producerFactory);
     }
