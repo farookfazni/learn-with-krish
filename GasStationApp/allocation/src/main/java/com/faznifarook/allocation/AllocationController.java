@@ -23,15 +23,15 @@ public class AllocationController {
 //
 //    }
 
-//    @KafkaListener(topics = "mainTopic", groupId = "groupId")
-//    @PostMapping("/data")
-//    public void placeAllocation(@RequestBody String data){ // AllocaionCheckResponce allocaionCheckResponce
-////        log.info("New Order has been Placed {}",orderRequest);
-//        allocationCheckService.listener(data);
-//    }
-
 //    @PostMapping
 //    public void publish(@RequestBody MessageRequest messageRequest){
 //        kafkaTemplate.send("mainTopic", messageRequest.message());
 //    }
+
+//    Updating Stock Amount From Admin (Intial Built)
+    @PostMapping("/update-stock")
+    public void updatedStock(@RequestBody UpdateStockmessage updateStockmessage){
+        allocationCheckService.stockUpdate(updateStockmessage);
+    }
+
 }

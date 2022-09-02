@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Order")
+//@Entity(name = "Order")
 public class Order {
     @Id
     private Integer orderId;
