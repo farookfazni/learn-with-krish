@@ -7,6 +7,8 @@ import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
 public class KafkaTopicConfig {
+
+//    todo: make only one topic that should be listed by every service but only the related service should access the data
     @Bean
     public NewTopic mainTopic(){
         return TopicBuilder.name("mainTopic")

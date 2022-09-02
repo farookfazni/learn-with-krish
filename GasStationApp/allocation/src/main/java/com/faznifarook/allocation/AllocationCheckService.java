@@ -4,7 +4,6 @@ import com.faznifarook.allocation.entity.AllocationCheckHistory;
 import com.faznifarook.allocation.entity.Order;
 import com.faznifarook.allocation.entity.Stock;
 import com.faznifarook.allocation.repo.AllocationCheckHistoryRepositry;
-//import com.faznifarook.allocation.repo.OrderRepository;
 import com.faznifarook.allocation.repo.StockRepository;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -27,9 +26,11 @@ public class AllocationCheckService {
     private final StockRepository stockRepository;
 
 //    Read the Kafka Object
+//    Note: this is only used for one message at a time
+//    todo: need to change the code to handle multiple requests at a time
     @KafkaListener(topics = "mainTopic", groupId = "groupId")
     public void listenerForOrder (String data) {
-//        Converting Sting to Json of Paticular Object
+//        Converting Sting to Json of Particular Object
         Gson g = new Gson();
         Order o = g.fromJson(data,Order.class);
 
@@ -43,17 +44,19 @@ public class AllocationCheckService {
         Integer availableStock = sto.getAvailableStock();
         Integer allocationstock = o.getAllocAmount();
 
-// Saving the values to allocation History table by checking Weather the Stock is available or not
+//        Saving the values to allocation History table by checking Weather the Stock is available or not
+//        todo: if the stock is not available need to send the message to client as "Out of Stock"
         System.out.println("Listener received json: " + o);
         AllocationCheckHistory allocationCheckHistory = AllocationCheckHistory
                 .builder()
                 .orderId(o.getOrderId())
                 .allocAmmount(o.getAllocAmount())
-                .status(o.getStatus())
+                .status("Order Allocated") // todo: if the isStockAvailbe is false status should be "out of stock" else "Order Allocated"
                 .createdAt(LocalDateTime.now())
                 .isStockAvailable(checkStock(availableStock,allocationstock,alreadyAllocatedStock)) // Checking whether the stock is available or not
                 .build();
-        allocationCheckHistoryRepositry.save(allocationCheckHistory);
+        allocationCheckHistoryRepositry.save(allocationCheckHistory); // todo: if stock is not Available what to do???
+//        todo: Need To send this To "Schedule Service"
     }
 
 //    updating Stock From PostMaping From Admin Side (Intial Built)
@@ -79,7 +82,7 @@ public class AllocationCheckService {
             return true;
         }
         else
-            return false; // todo: throw an error if stock is not available
+            return false; // todo: throw an error if stock is not available "Out of Stock"
     }
 
 //    public void placeCheck(MessageRequest messageRequest){
