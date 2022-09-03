@@ -23,14 +23,13 @@ public class OrderService {
                 .allocAmount(orderRequest.allocAmount())
                 .build();
 //        todo: check the allocation is available or not
-
+//      sending the order details to allocation service to check weather stock is available or not
         Message<Order> message = MessageBuilder.withPayload(order)
                 .setHeader(KafkaHeaders.TOPIC,"mainTopic")
                         .build();
         //  Storing to database
         orderRepository.save(order);
         //  Sending to kafka Topic
-//        kafkaTemplate.send("mainTopic", order);
         kafkaTemplate.send(message);
     }
 

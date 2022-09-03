@@ -17,6 +17,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,8 @@ public class AllocationCheckService {
 
     private final AllocationCheckHistoryRepositry allocationCheckHistoryRepositry;
     private final StockRepository stockRepository;
+
+    static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
     KafkaTemplate<String,AllocationCheckHistory> kafkaTemplate;
 
@@ -62,7 +65,18 @@ public class AllocationCheckService {
                 .isStockAvailable(checkStock(availableStock,allocationstock,alreadyAllocatedStock)) // Checking whether the stock is available or not
                 .build();
         allocationCheckHistoryRepositry.save(allocationCheckHistory); // todo: if stock is not Available what to do???
-//        todo: Need To send this To "Schedule Service"
+//        todo: Need To send Date And Time Through Kafka
+//        Sending Without Date And Time
+//        LocalDateTime currentDateTime = LocalDateTime.now();
+//        String formattedDateTime = currentDateTime.format(formatter);
+//        AllocationCheckHistory allocationCheckHistoryToKafka = AllocationCheckHistory
+//                .builder()
+//                .orderId(o.getOrderId())
+//                .allocAmmount(o.getAllocAmount())
+//                .status("Order Allocated")
+//                .isStockAvailable(checkStock(availableStock,allocationstock,alreadyAllocatedStock))
+//                .build();
+
         Message<AllocationCheckHistory> message = MessageBuilder.withPayload(allocationCheckHistory)
                 .setHeader(KafkaHeaders.TOPIC,"secondTopic")
                 .build();

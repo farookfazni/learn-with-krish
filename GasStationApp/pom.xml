@@ -6,6 +6,7 @@
 	<modules>
 		<module>order</module>
         <module>allocation</module>
+        <module>schedule</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
