@@ -22,7 +22,7 @@ public class OrderService {
                 .status(orderRequest.status())
                 .allocAmount(orderRequest.allocAmount())
                 .build();
-//        todo : check the allocation is available or not
+//        todo: check the allocation is available or not
 
         Message<Order> message = MessageBuilder.withPayload(order)
                 .setHeader(KafkaHeaders.TOPIC,"mainTopic")

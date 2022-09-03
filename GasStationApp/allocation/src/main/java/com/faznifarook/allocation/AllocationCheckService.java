@@ -10,6 +10,10 @@ import com.google.gson.JsonElement;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,6 +28,8 @@ public class AllocationCheckService {
 
     private final AllocationCheckHistoryRepositry allocationCheckHistoryRepositry;
     private final StockRepository stockRepository;
+
+    KafkaTemplate<String,AllocationCheckHistory> kafkaTemplate;
 
 //    Read the Kafka Object
 //    Note: this is only used for one message at a time
@@ -57,16 +63,38 @@ public class AllocationCheckService {
                 .build();
         allocationCheckHistoryRepositry.save(allocationCheckHistory); // todo: if stock is not Available what to do???
 //        todo: Need To send this To "Schedule Service"
+        Message<AllocationCheckHistory> message = MessageBuilder.withPayload(allocationCheckHistory)
+                .setHeader(KafkaHeaders.TOPIC,"secondTopic")
+                .build();
+        kafkaTemplate.send(message);
     }
 
-//    updating Stock From PostMaping From Admin Side (Intial Built)
+//    updating Stock From Post Mapping From Admin Side (Initial Built)
 //    todo: Make sure the Admin the only person can change this
     public void stockUpdate(UpdateStockmessage updateStockmessage){
-        Stock stock = Stock.builder()
-                .allocatedAmount(updateStockmessage.allocatedAmount())
-                .availableStock(updateStockmessage.availableStock())
-                .build();
-        stockRepository.save(stock);
+        List<Stock> st = stockRepository.findByIdDESC();
+
+//        Checks weather stock table is empty or not if its empty "save the stock" else "update the stock"
+        if (st.isEmpty() == true){
+            Stock stock = Stock.builder()
+                    .allocatedAmount(updateStockmessage.allocatedAmount())
+                    .availableStock(updateStockmessage.availableStock())
+                    .build();
+            stockRepository.save(stock);
+        }else{
+            Stock sto = st.get(0);
+
+            Integer alreadyAllocatedStock = sto.getAllocatedAmount();
+            Integer availableStock = sto.getAvailableStock();
+            Integer TotalStock = availableStock + updateStockmessage.availableStock();
+            Integer TotalAllocation = alreadyAllocatedStock + updateStockmessage.allocatedAmount();
+
+            Stock stock = Stock.builder()
+                    .allocatedAmount(TotalAllocation)
+                    .availableStock(TotalStock)
+                    .build();
+            stockRepository.save(stock);
+        }
     }
 
     // Function for Checking the Stock available or not and updating stock Table
