@@ -21,6 +21,6 @@ public class AllocationCheckHistory {
     private Integer allocAmmount;
     private String status;
     private Boolean isStockAvailable;
-    private ArrayList createdAt;
+    private ArrayList<Integer> createdAt;
 
 }

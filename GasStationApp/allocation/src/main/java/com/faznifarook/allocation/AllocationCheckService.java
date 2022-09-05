@@ -77,10 +77,11 @@ public class AllocationCheckService {
 //                .isStockAvailable(checkStock(availableStock,allocationstock,alreadyAllocatedStock))
 //                .build();
 
-        Message<AllocationCheckHistory> message = MessageBuilder.withPayload(allocationCheckHistory)
-                .setHeader(KafkaHeaders.TOPIC,"secondTopic")
-                .build();
-        kafkaTemplate.send(message);
+//        Message<AllocationCheckHistory> message = MessageBuilder.withPayload(allocationCheckHistory)
+//                .setHeader(KafkaHeaders.TOPIC,"secondTopic")
+//                .build();
+//        kafkaTemplate.send(message);
+        kafkaTemplate.send("secondTopic",allocationCheckHistory);
     }
 
 //    updating Stock From Post Mapping From Admin Side (Initial Built)
