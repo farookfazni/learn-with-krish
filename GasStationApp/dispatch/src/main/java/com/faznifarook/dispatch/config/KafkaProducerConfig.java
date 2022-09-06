@@ -1,6 +1,6 @@
-package com.faznifarook.schedule.config;
+package com.faznifarook.dispatch.config;
 
-import com.faznifarook.schedule.entity.Schedule;
+import com.faznifarook.dispatch.entity.Schedule;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

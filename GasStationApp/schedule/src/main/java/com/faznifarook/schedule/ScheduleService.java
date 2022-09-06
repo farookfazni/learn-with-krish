@@ -7,6 +7,9 @@ import com.google.gson.*;
 import lombok.AllArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
@@ -24,7 +27,7 @@ public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
 
-//    KafkaTemplate<String, AllocationCheckHistory> kafkaTemplate;
+    KafkaTemplate<String, Schedule> kafkaTemplate;
 
     @KafkaListener(topics = "secondTopic", groupId = "groupId")
     public void scheduleOrder(String data){
@@ -33,7 +36,7 @@ public class ScheduleService {
         Gson g = new Gson();
         AllocationCheckHistory a = g.fromJson(data,AllocationCheckHistory.class);
 
-//        Converting ArrayList To LocalDateAndTime
+//      Converting ArrayList To LocalDateAndTime
         List<Integer> date = a.getCreatedAt();
         LocalDateTime createdAt =LocalDateTime.of(date.get(0),date.get(1),date.get(2), date.get(3),date.get(4),date.get(5),date.get(6));
         System.out.println(createdAt);
@@ -46,5 +49,10 @@ public class ScheduleService {
                 .scheduleTime(LocalDateTime.now().plusDays(5))
                 .build();
         scheduleRepository.save(schedule);
+
+        Message<Schedule> message = MessageBuilder.withPayload(schedule)
+                .setHeader(KafkaHeaders.TOPIC,"thirdTopic")
+                .build();
+        kafkaTemplate.send(message);
     }
 }

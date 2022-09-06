@@ -52,6 +52,7 @@ public class AllocationCheckService {
         Integer alreadyAllocatedStock = sto.getAllocatedAmount();
         Integer availableStock = sto.getAvailableStock();
         Integer allocationstock = o.getAllocAmount();
+        Boolean checkStock = checkStock(availableStock,allocationstock,alreadyAllocatedStock);
 
 //        Saving the values to allocation History table by checking Weather the Stock is available or not
 //        todo: if the stock is not available need to send the message to client as "Out of Stock"
@@ -60,28 +61,17 @@ public class AllocationCheckService {
                 .builder()
                 .orderId(o.getOrderId())
                 .allocAmmount(o.getAllocAmount())
-                .status("Order Allocated") // todo: if the isStockAvailbe is false status should be "out of stock" else "Order Allocated"
+                .status(checkStatus(checkStock)) // todo: if the isStockAvailbe is false status should be "out of stock" else "Order Allocated"
                 .createdAt(LocalDateTime.now())
-                .isStockAvailable(checkStock(availableStock,allocationstock,alreadyAllocatedStock)) // Checking whether the stock is available or not
+                .isStockAvailable(checkStock) // Checking whether the stock is available or not
                 .build();
         allocationCheckHistoryRepositry.save(allocationCheckHistory); // todo: if stock is not Available what to do???
-//        todo: Need To send Date And Time Through Kafka
-//        Sending Without Date And Time
-//        LocalDateTime currentDateTime = LocalDateTime.now();
-//        String formattedDateTime = currentDateTime.format(formatter);
-//        AllocationCheckHistory allocationCheckHistoryToKafka = AllocationCheckHistory
-//                .builder()
-//                .orderId(o.getOrderId())
-//                .allocAmmount(o.getAllocAmount())
-//                .status("Order Allocated")
-//                .isStockAvailable(checkStock(availableStock,allocationstock,alreadyAllocatedStock))
-//                .build();
 
-//        Message<AllocationCheckHistory> message = MessageBuilder.withPayload(allocationCheckHistory)
-//                .setHeader(KafkaHeaders.TOPIC,"secondTopic")
-//                .build();
-//        kafkaTemplate.send(message);
-        kafkaTemplate.send("secondTopic",allocationCheckHistory);
+        Message<AllocationCheckHistory> message = MessageBuilder.withPayload(allocationCheckHistory)
+                .setHeader(KafkaHeaders.TOPIC,"secondTopic")
+                .build();
+        kafkaTemplate.send(message);
+//        kafkaTemplate.send("secondTopic",allocationCheckHistory);
     }
 
 //    updating Stock From Post Mapping From Admin Side (Initial Built)
@@ -127,11 +117,11 @@ public class AllocationCheckService {
         else
             return false; // todo: throw an error if stock is not available "Out of Stock"
     }
-
-//    public void placeCheck(MessageRequest messageRequest){
-//        AllocationCheckHistory allocationCheckHistory = AllocationCheckHistory
-//                .builder()
-//                .orderId(messageRequest.)
-//                .build();
-//    }
+    public String checkStatus(Boolean checkStock){
+        if (checkStock == true){
+            return "Order Allocated";
+        }else {
+            return "Out Of Stock";
+        }
+    }
 }

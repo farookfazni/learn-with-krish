@@ -1,12 +1,12 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
   application:
-    name: schedule
+    name: dispatch
   datasource:
     username: postgres
-    url: jdbc:postgresql://localhost:5432/schedule
+    url: jdbc:postgresql://localhost:5432/dispatch
     password: password
   jpa:
     hibernate:
