@@ -8,6 +8,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,6 +33,12 @@ public class OrderService {
         //  Sending to kafka Topic
         kafkaTemplate.send(message);
     }
+
+//    public void getOrder(List<Order> orderList) {
+//        for (int i=0; i<=orderList.size(); i++){
+//            Order o = orderList.get(i);
+//        }
+//    }
 
 //    public Order findOrder(Integer id){
 //        Optional<Order> orderResponse = orderRepository.findById(id);

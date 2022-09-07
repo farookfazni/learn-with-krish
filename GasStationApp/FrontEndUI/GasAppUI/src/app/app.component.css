@@ -1,0 +1,6 @@
+.content-wrap {
+	grid-area: content;
+	padding: 3em;
+	overflow: auto;
+}
+
