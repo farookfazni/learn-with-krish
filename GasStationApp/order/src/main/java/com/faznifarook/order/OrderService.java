@@ -8,6 +8,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,8 @@ public class OrderService {
     public void placeOrder(OrderRequest orderRequest) {
 
         Order order = Order.builder()
-                .status(orderRequest.status())
+                .status("Order Created")
+                .createdAt(LocalDateTime.now())
                 .allocAmount(orderRequest.allocAmount())
                 .build();
 //        todo: check the allocation is available or not
