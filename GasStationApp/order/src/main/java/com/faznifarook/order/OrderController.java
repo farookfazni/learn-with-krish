@@ -19,6 +19,8 @@ public class OrderController {
     private final OrderRepository orderRepository;
 //    @Autowired KafkaTemplate<String,Order> kafkaTemplate;
 
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/data")
     public void placeOrder(@RequestBody OrderRequest orderRequest){
         log.info("New Order has been Placed {}",orderRequest);
