@@ -6,8 +6,20 @@
           <h4
             class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title"
           >
-            {{ order.orderId
-            }}<svg
+            Order ID : {{ order.orderId }}
+          </h4>
+          <p>Allocation Amount</p>
+          <span class="hind-font caption-12 c-dashboardInfo__count">{{
+            order.allocAmount
+          }}</span>
+          <span>Status : {{ order.status }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <svg
               class="MuiSvgIcon-root-19"
               focusable="false"
               viewBox="0 0 24 24"
@@ -18,14 +30,4 @@
               <path
                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
               ></path>
-            </svg>
-          </h4>
-          <span class="hind-font caption-12 c-dashboardInfo__count">{{
-            order.allocAmount
-          }}</span>
-          <span>{{ order.status }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+            </svg> -->

@@ -158,3 +158,10 @@ h1 {
   min-width: 30%;
   position: relative;
 } */
+.row {margin: 0 -5px;}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+} 

@@ -19,6 +19,10 @@ export class CreateOrderComponent implements OnInit {
     });
   }
 
+  reloadPage(){
+    window.location.reload();
+  }
+
   ngOnInit(): void {
   }
 

@@ -1,12 +1,24 @@
+<div class="wrap">
+  <form (ngSubmit)="createOrder(title)">
+    <label class="heading">Allocation Amount</label><br />
+    <input type="text" name="Allocation Amount" #title /><br />
+    <input
+      class="button"
+      type="submit"
+      name="Create Order"
+      value="Create Order"
+      (click)="reloadPage()"
+    /><br />
+  </form>
+</div>
+
 <!-- <h1>Fuel App</h1> -->
-<!-- <div class="c-dashboardInfo"> -->
-  <div class="wrap">
-    <form (ngSubmit)="createOrder(title)">
-      <label>Allocation Amount</label><br />
-      <input type="text" name="Allocation Amount" #title/><br />
-      <input class="button" type="submit" name="Create Order" value="Create Order"/><br />
-      <!-- (keyup)="createOrder(Allocation Amount)" -->
-      <!-- <button>Create Order</button><br> -->
-    </form>
-  </div>
-<!-- </div> -->
+<!-- <div class="box">
+  <a class="button" href="#popup1">Create Order</a>
+</div>
+
+<div id="popup1" class="overlay">
+  <div class="popup"> -->
+<!-- <a class="close" href="#">&times;</a> -->
+<!-- </div>
+</div> -->
