@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { StockComponent } from './stock/stock.component';
 import { AddStockComponent } from './add-stock/add-stock.component';
 import { FormsModule } from '@angular/forms';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StockComponent,
     AddStockComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,

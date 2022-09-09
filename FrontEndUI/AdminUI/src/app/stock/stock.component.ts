@@ -9,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockComponent implements OnInit {
 
-  stocks?: any[];
-  title = "List of Orders";
+  stocks?: any[];;
 
   constructor(http: HttpClient){
     

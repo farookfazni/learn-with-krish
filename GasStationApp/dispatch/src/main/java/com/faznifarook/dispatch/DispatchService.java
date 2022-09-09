@@ -4,18 +4,21 @@ import com.faznifarook.dispatch.entity.Dispatch;
 import com.faznifarook.dispatch.entity.Schedule;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Bean;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class DispatchService {
 //    todo: Need To Find a Way To make the Order Dispatch on the Scheduled date
     private final DispatchRepository dispatchRepository;
+//    private final  DispatchOrderRequest dispatchOrderRequest;
 
     @KafkaListener(topics = "thirdTopic", groupId = "groupId")
     public void dispatchOrder(String data){
@@ -54,5 +57,21 @@ public class DispatchService {
         }else {
             return "Order Not Dispatched";
         }
+    }
+
+    public void dispatchOrderAdmin(DispatchOrderRequest dispatchOrderRequest) {
+//        if(dispatchOrderRequest.isdispatch() == true){
+//            Optional<Dispatch> dt = dispatchRepository.findById(dispatchOrderRequest.id());
+//            Dispatch dispatch = dt.get();
+//            Dispatch dispatch = Dispatch.builder()
+//                    .status("Order Dispatched")
+//                    .build();
+//            dispatch.setStatus("Order Dispatched");
+//            dispatch.setIsDispatched(true);
+            log.info("dispatch",dispatchOrderRequest);
+//            dispatchRepository.save(dispatch);
+//            return "Order Dispatched";
+//        }
+
     }
 }
