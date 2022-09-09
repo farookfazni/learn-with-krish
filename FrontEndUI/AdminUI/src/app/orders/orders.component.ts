@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class OrdersComponent implements OnInit {
 
   orders?: any[];;
-  isdispatch: boolean = true;
+  isdispatch: boolean = false;
   // http2?:HttpClient;
 
   constructor(private http: HttpClient){
@@ -25,7 +25,7 @@ export class OrdersComponent implements OnInit {
     let post = {isdispatch:this.isdispatch,id:id};
     console.log(post);
     this.http.post('http://localhost:8083/api/v1/dispatch/update-dispatch',post).subscribe(response => {
-      console.log(response);
+      window.location.reload();
     });
   }
 

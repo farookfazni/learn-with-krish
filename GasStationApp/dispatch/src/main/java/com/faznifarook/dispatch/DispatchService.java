@@ -58,20 +58,4 @@ public class DispatchService {
             return "Order Not Dispatched";
         }
     }
-
-    public void dispatchOrderAdmin(DispatchOrderRequest dispatchOrderRequest) {
-//        if(dispatchOrderRequest.isdispatch() == true){
-//            Optional<Dispatch> dt = dispatchRepository.findById(dispatchOrderRequest.id());
-//            Dispatch dispatch = dt.get();
-//            Dispatch dispatch = Dispatch.builder()
-//                    .status("Order Dispatched")
-//                    .build();
-//            dispatch.setStatus("Order Dispatched");
-//            dispatch.setIsDispatched(true);
-            log.info("dispatch",dispatchOrderRequest);
-//            dispatchRepository.save(dispatch);
-//            return "Order Dispatched";
-//        }
-
-    }
 }

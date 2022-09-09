@@ -18,7 +18,14 @@
         <td data-column="Created At">{{order.createdAt}}</td>
         <td data-column="Dispatch Scheduled Date">{{order.dispatchAt}}</td>
         <td data-column="Status">{{order.status}}</td>
-        <td data-column="Dispatch Order"><button (click)="updateOrder(order.orderId)">{{order.isDispatched}}</button></td>
+        <td data-column="Dispatch Order">
+            <button class="false-button" *ngIf="order.isDispatched==false" (click)="updateOrder(order.dispatchId)">
+                {{order.isDispatched}}
+            </button>
+            <button class="true-button" *ngIf="order.isDispatched==true">
+                {{order.isDispatched}}
+            </button>
+        </td>
       </tr>
     </tbody>
   </table>

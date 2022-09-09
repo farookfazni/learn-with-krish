@@ -21,16 +21,20 @@ public class DispatchController {
     @PostMapping("/update-dispatch")
     public void placeOrder(@RequestBody DispatchOrderRequest dispatchOrderRequest){
         log.info("New Order has been Placed {}",dispatchOrderRequest.id());
-//        Optional<Dispatch> dt = dispatchRepository.findById(dispatchOrderRequest.id());
-//        Dispatch dispatch = dt.get();
-//        Integer id = dispatchOrderRequest.id();
-//        Boolean isDispatch = dispatchOrderRequest.isdispatch();
-        dispatchService.dispatchOrderAdmin(dispatchOrderRequest);
+        Integer id = dispatchOrderRequest.id();
+        Boolean isDispatch = dispatchOrderRequest.isdispatch();
+        Dispatch dispatch = dispatchRepository.getOne(id);
+        if(isDispatch == false){
+            dispatch.setStatus("Order Dispatched");
+            dispatch.setIsDispatched(true);
+            dispatchRepository.save(dispatch);
+        }
+        log.info("New Order has been Placed {}",id);
     }
 
     @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping("/get-all")
     public List<Dispatch> getOrders(){
-        return dispatchRepository.findAll();
+        return dispatchRepository.findAllByIdDESC();
     }
 }
